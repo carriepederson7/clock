@@ -2,11 +2,34 @@ using System;
 
 class Clock
 {
-  static decimal TimeToDegrees(int hours, int minutes)
+  static decimal TimeToDegrees(decimal hours, decimal minutes)
   {
-    decimal hourDegrees = (((hour * 60) + minutes) / 720) *360;
-    Console.WriteLine(hourDegrees);
-    return hourDegrees
+    return (((hours * 60) + minutes) / 720) *360;
+    // Console.WriteLine(hourDegrees);
+    // return hourDegrees;
+
+  }
+
+  static decimal CalculateAngle(decimal degreeHours, decimal degreeMinutes)
+  {
+    if(degreeHours>degreeMinutes)
+    {
+      decimal angle = degreeHours - degreeMinutes;
+      if (angle>180)
+      {
+        angle = 360 - angle;
+      }
+      return angle;
+    }
+    else
+    {
+      decimal angle= degreeMinutes - degreeHours;
+      if (angle>180)
+      {
+        angle = 360 - angle;
+      }
+      return angle;
+    }
 
   }
 
@@ -17,16 +40,17 @@ class Clock
   {
   Console.WriteLine("What is the hour?");
   string stringHour = Console.ReadLine();
-  int hour = int.Parse(stringHour);
+  decimal hour = Convert.ToDecimal(stringHour);
 
   Console.WriteLine("What are the mintues?");
   string stringMinutes = Console.ReadLine();
-  int minutes = int.Parse(stringMinutes);
+  decimal minutes = Convert.ToDecimal(stringMinutes);
 
 
-  int minuteDegrees = (minutes * 6);
-
-
+  decimal minuteDegrees = (minutes * 6);
+  decimal hourDegrees = TimeToDegrees(hour, minutes);
+  decimal finalDegree = CalculateAngle(hourDegrees, minuteDegrees);
+  Console.Write("The angle between the hour and minute hand is " + finalDegree);
 
 
   }
